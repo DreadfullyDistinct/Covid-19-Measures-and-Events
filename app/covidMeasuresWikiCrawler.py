@@ -16,9 +16,16 @@ args = parser.parse_args()
 month = args.month
 year = args.year
 
+wikiPrefix =''
 
+if(args.month == 'March'):
+    wikiPrefix='Responses_to'
+else:
+    wikiPrefix='Timeline_of'
+    
 # Path for Timeline info of COVID-19 in wikipedia
-wikiPath = 'https://en.wikipedia.org/w/api.php?action=parse&page=Timeline_of_the_2019%E2%80%9320_coronavirus_pandemic_in_'+quote_plus(month)+'_'+quote_plus(year)+'_&prop=wikitext&formatversion=2&format=json'
+wikiPath = 'https://en.wikipedia.org/w/api.php?action=parse&page='+quote_plus(wikiPrefix)+'_the_2019%E2%80%9320_coronavirus_pandemic_in_'+quote_plus(month)+'_'+quote_plus(year)+'&prop=wikitext&formatversion=2&format=json'
+print(wikiPath)
 
 jsonResponse = urllib.request.urlopen(wikiPath).read().decode(encoding="utf-8", errors="ignore")
 
